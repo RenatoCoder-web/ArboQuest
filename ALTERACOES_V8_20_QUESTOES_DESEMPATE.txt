@@ -1,0 +1,12 @@
+ARBOQUEST V8 — BANCO AMPLIADO E MULTIPLAYER EQUILIBRADO
+
+1. V6.2 permanece como versão estável de referência.
+2. Cada nível agora possui 20 questões regulares (60 no total), organizadas em 10 pares equivalentes.
+3. MULTIPLAYER: cada jogador responde 10 questões; em cada par, J1 recebe uma questão e J2 recebe a equivalente. A atribuição entre as duas questões do par é sorteada.
+4. INDIVIDUAL: continua com 10 questões; o jogo sorteia uma questão de cada par, preservando equilíbrio temático.
+5. Alternativas continuam embaralhadas a cada partida.
+6. Banco específico de desempate: 3 pares por nível (18 questões extras).
+7. Se houver empate após as 10 questões de cada jogador, abre-se uma rodada de desempate com uma questão equivalente para cada jogador. Se persistir o empate, usa-se outro par, até três rodadas.
+8. O ranking separa desempenho regular (10 questões) e desempenho no desempate.
+9. A música da tela final (vitória/derrota) agora fica em loop até sair da tela.
+10. Feedback continua sob controle do jogador/professor por meio do botão PRÓXIMA PERGUNTA.

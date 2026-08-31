@@ -1,0 +1,31 @@
+ARBOQUEST — VERSÃO APRIMORADA DE MECÂNICA E INTERFACE
+
+1. Tela "COMO JOGAR" exibida após PLAY e antes da batalha.
+   - Explica ATK, DEF e ESPECIAL.
+   - Informa o nível selecionado.
+   - Explica que o feedback só avança com ação do usuário.
+
+2. Feedback pedagógico controlado pelo jogador/professor.
+   - Não desaparece automaticamente.
+   - Aparece para respostas corretas e incorretas.
+   - Botão "PRÓXIMA PERGUNTA" controla o avanço.
+
+3. Créditos preenchidos.
+   - Renato Francisco Batista
+   - Telma Temoteo dos Santos
+   - Universidade de Pernambuco (UPE)
+
+4. Alternativas responsivas reforçadas.
+   - Altura automática conforme o texto.
+   - Quebra de linha dentro da caixa.
+   - Sem avanço por temporizador.
+
+5. Mantidas as correções anteriores:
+   - responsividade geral;
+   - barras de vida percentuais;
+   - barras 10px acima dos personagens;
+   - efeito ATK/DEF até o resultado da resposta;
+   - 30 questões em três níveis.
+
+OBSERVAÇÃO SOBRE O MOSQUITO:
+O arquivo boss3.gif é uma arte estilizada com corpo arredondado e marcações que não correspondem fielmente ao padrão corporal do Aedes aegypti. A apresentação responsiva preserva a proporção original do GIF; portanto, a correção morfológica exige substituir/redesenhar o ativo gráfico, e não apenas alterar CSS.
