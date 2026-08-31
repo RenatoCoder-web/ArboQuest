@@ -1,0 +1,1661 @@
+@font-face {
+    font-family: font1;
+    src: url(I-pixel-u.ttf);
+}
+
+body {
+    font-size: 15pt;
+}
+
+html {
+    background-color: #C2C8D9;
+    user-select: none;
+}
+
+.nameGame {
+    position: absolute;
+    left: 15%;
+    top: 5%;
+    width: calc(530px*1.6);
+    height: calc(512px*1.6);
+    image-rendering: pixelated;
+}
+
+.start {
+    position: absolute;
+    left: 42%;
+    top: 80%;
+    width: 200px;
+    height: 120px;
+    background: #646A96;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-family: font1;
+    border: solid 10px #3B4067;
+}
+
+.buttonCredits {
+    position: absolute;
+    left: 80%;
+    top: 95%;
+    width: 250px;
+    height: 100px;
+    border: solid 5px #1B1E3D;
+    background: #797A86;
+    font-family: font1;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dificult {
+    position: absolute;
+    left: 35%;
+    top: 70%;
+    width: 350px;
+    height: 120px;
+    background: #83CB81;
+    border: solid 8px #31183B;
+    font-family: font1;
+    font-size: 60px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.buttonBack {
+    position: absolute;
+    left: 1%;
+    top: 1%;
+    width: 150px;
+    height: 60px;
+    border: solid 5px #342443;
+    background: #757D8D;
+    font-family: font1;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player {
+    position: absolute;
+    left: 100px;
+    top: 200px;
+    width: 150px;
+    height: 200px;
+}
+
+.inimigo {
+    position: absolute;
+    left: 770px;
+    top: 100px;
+    width: 150px;
+    height: 200px;
+}
+
+.opcao {
+    position: absolute;
+    background: #7A94D3;
+    border: solid 7px #384668;
+    z-index: 20;
+}
+
+.spawnMsg {
+    max-width: 4px;
+    max-height: 300px;
+    font-family: font1;
+    display: flex;
+    padding: 10px;
+    transition: opacity 0.5s ease;
+    
+}
+
+.legend {
+    position: absolute;
+    left: 100px;
+    top: 450px;
+    max-width: 800px;
+    max-height: 200px;
+    background: #7D81AE;
+    border: solid 10px #363B6B;
+    font-family: font1;
+    font-size: 40px;
+    display: flex;
+    padding: 10px 10px 10px 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.lifePlayerRed {
+    position: absolute;
+    left: 70px;
+    top: 150px;
+    width: 200px;
+    height: 10px;
+    background: #C45C5C;
+    border: solid 2px #0E1536;
+}
+
+.lifeEnemyRed {
+    position: absolute;
+    left: 740px;
+    top: 350px;
+    width: 200px;
+    height: 10px;
+    background: #C45C5C;
+    border: solid 2px #0E1536;
+}
+
+.lifePlayer {
+    position: absolute;
+    left: 70px;
+    top: 150px;
+    width: 200px;
+    height: 10px;
+    background: #68AB5C;
+    border: solid 2px #0E1536;
+}
+
+.lifeEnemy {
+    position: absolute;
+    left: 740px;
+    top: 350px;
+    width: 200px;
+    height: 10px;
+    background: #68AB5C;
+    border: solid 2px #0E1536;
+}
+
+.buttonAtk {
+    position: absolute;
+    left: 50px;
+    top: 700px;
+    width: 100px;
+    height: 100px;
+    background: #BB7A5D;
+    z-index: 5;
+    border: solid 5px #4F516A;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.buttonDef {
+    position: absolute;
+    left: 50px;
+    top: 820px;
+    width: 100px;
+    height: 100px;
+    background: #83A46C;
+    z-index: 5;
+    border: solid 5px #4F516A;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonStar {
+    position: absolute;
+    left: 50px;
+    top: 940px;
+    width: 100px;
+    height: 100px;
+    background: #D8B75E;
+    z-index: 5;
+    border: solid 5px #4F516A;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: grayscale(90%);
+}
+
+.imgAtk,
+.imgDef,
+.imgStar {
+    position: absolute;
+    image-rendering: pixelated;
+    width: calc(32px*2);
+    height: calc(32px*2);
+}
+
+.imgEnemy {
+    position: absolute;
+    top: -50px;
+    left: -80px;
+    image-rendering: pixelated;
+    width: calc(128px*1.6);
+    height: calc(128px*1.6);
+    transform: scaleX(-1);
+}
+
+.imgPlayer {
+    position: absolute;
+    top: -90px;
+    left: -30px;
+    image-rendering: pixelated;
+    width: calc(188px);
+    height: calc(298px);
+    transform: scaleX();
+}
+
+.effect {
+    position: absolute;
+    image-rendering: pixelated;
+    width: calc(32px*3.2);
+    height: calc(32px*3.2);
+    z-index: 9;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 180vw;
+    height: 100vh;
+    image-rendering: pixelated;
+    background-size: cover;
+    background-position: center;
+}
+
+.background2 {
+    position: fixed;
+    top: -300px;
+    left: 0;
+    width: 1408px;
+    height: 768px;
+    image-rendering: pixelated;
+    filter: grayscale(70%);
+}
+
+/* Compatibilidade com mouse/toque e ajuste básico de tela */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.start,
+.buttonCredits,
+.dificult,
+.buttonBack,
+.opcao,
+.buttonAtk,
+.buttonDef,
+.buttonStar {
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+/* Tela inicial adaptável sem alterar a identidade visual */
+@media (max-width: 1100px) {
+    .nameGame {
+        left: 50%;
+        top: 3%;
+        transform: translateX(-50%);
+        width: min(78vw, 620px);
+        height: auto;
+    }
+    
+    .start {
+        left: 50%;
+        top: 49%;
+        transform: translateX(-50%);
+        width: min(42vw, 200px);
+        height: 90px;
+        font-size: clamp(25px, 5vw, 40px);
+    }
+    
+    .dificult {
+        left: 50%;
+        top: 64%;
+        transform: translateX(-50%);
+        width: min(78vw, 350px);
+        height: 90px;
+        font-size: clamp(22px, 5vw, 44px);
+    }
+    
+    .buttonCredits {
+        left: 50%;
+        top: 82%;
+        transform: translateX(-50%);
+        width: min(62vw, 250px);
+        height: 72px;
+        font-size: clamp(22px, 5vw, 34px);
+    }
+    
+    .effect {
+        width: calc(32px*3.2);
+        height: calc(32px*3.2);
+    }
+    
+    .lifePlayerRed,
+    .lifePlayer {
+        left: 5vw;
+        top: 110px;
+        width: 200px;
+        
+    }
+    
+    .lifeEnemyRed,
+    .lifeEnemy {
+        left: 700px;
+        right: 5vw;
+        top: 60px;
+        width: 200px;
+        
+    }
+}
+
+/* Em telas menores, organiza pergunta e alternativas dentro da área visível. */
+@media (max-width: 1000px) {
+    .player {
+        left: 6vw;
+        top: 120px;
+    }
+    
+    .inimigo {
+        left: auto;
+        right: 6vw;
+        top: 120px;
+    }
+    
+    .lifePlayerRed,
+    .lifePlayer {
+        left: 5vw;
+        top: 90px;
+        width: 200px;
+        
+    }
+    
+    .lifeEnemyRed,
+    .lifeEnemy {
+        left: auto;
+        right: 5vw;
+        top: 90px;
+        width: 200px;
+        
+    }
+    
+    .legend {
+        left: 5vw;
+        top: 350px;
+        width: 90vw;
+        max-width: none;
+        max-height: none;
+        min-height: 320px;
+        padding: 12px;
+        font-size: clamp(22px, 4vw, 36px);
+    }
+    
+    .opcao {
+        position: absolute;
+        width: 60vw;
+        max-width: 600px;
+    }
+    
+    .spawnMsg {
+        max-width: none;
+        max-height: none;
+        font-size: clamp(16px, 3vw, 24px);
+    }
+    
+    .opcao:nth-of-type(1),
+    .opcao:nth-of-type(2),
+    .opcao:nth-of-type(3),
+    .opcao:nth-of-type(4) {
+        left: auto;
+    }
+    
+    .buttonAtk,
+    .buttonDef,
+    .buttonStar {
+        width: 70px;
+        height: 70px;
+        left: 2vw;
+    }
+    
+    .buttonAtk {
+        top: 700px;
+    }
+    
+    .buttonDef {
+        top: 780px;
+    }
+    
+    .buttonStar {
+        top: 860px;
+    }
+    
+    .imgAtk,
+    .imgDef,
+    .imgStar {
+        position: absolute;
+        image-rendering: pixelated;
+        width: calc(32px*1.5);
+        height: calc(32px*1.5);
+        
+    }
+    
+    .effect {
+        width: calc(32px*2.2);
+        height: calc(32px*2.2);
+    }
+}
+
+/* ==========================================================
+   AJUSTE V2 - TELA INICIAL PARA FEIRA (desktop + celular)
+   Mantém a arte original, evitando sobreposição dos controles.
+   ========================================================== */
+.nameGame {
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    height: auto;
+    max-width: 72vw;
+    max-height: 38vh;
+    object-fit: contain;
+}
+
+.start {
+    left: 50%;
+    top: 46vh;
+    transform: translateX(-50%);
+    width: min(220px, 52vw);
+    height: clamp(64px, 10vh, 92px);
+    z-index: 20;
+}
+
+.dificult {
+    left: 50%;
+    top: 61vh;
+    transform: translateX(-50%);
+    width: min(390px, 78vw);
+    height: clamp(72px, 11vh, 120px);
+    font-size: clamp(23px, 5vw, 44px);
+    z-index: 20;
+}
+
+.buttonCredits {
+    left: 50%;
+    top: 79vh;
+    transform: translateX(-50%);
+    width: min(270px, 62vw);
+    height: clamp(58px, 9vh, 78px);
+    font-size: clamp(22px, 4vw, 34px);
+    z-index: 20;
+}
+
+@media (max-width: 600px) {
+    .nameGame {
+        max-width: 76vw;
+        max-height: 34vh;
+    }
+    
+    .start {
+        top: 40vh;
+        width: min(190px, 48vw);
+        height: 68px;
+        border-width: 7px;
+        font-size: 30px;
+    }
+    
+    .dificult {
+        top: 51vh;
+        width: 78vw;
+        height: 82px;
+        border-width: 6px;
+        padding: 6px;
+        font-size: clamp(21px, 6vw, 34px);
+    }
+    
+    .buttonCredits {
+        top: 65vh;
+        width: 58vw;
+        height: 62px;
+        border-width: 4px;
+        font-size: 25px;
+    }
+    
+    .effect {
+        width: calc(32px*2.2);
+        height: calc(32px*2.2);
+    }
+    
+    .legend {
+        left: 5vw;
+        top: 350px;
+        width: 195vw;
+        max-width: none;
+        max-height: none;
+        min-height: 120px;
+        padding: 12px;
+        font-size: clamp(22px, 4vw, 36px);
+    }
+    
+    .background2 {
+        top: -400px;
+    }
+    
+    .inimigo {
+        left: 500px;
+    }
+    
+    .lifeEnemy,
+    .lifeEnemyRed {
+        left: 470px;
+        top: 70px;
+    }
+    
+    .lifePlayer,
+    .lifePlayerRed {
+        top: 30px;
+        left: 30px;
+    }
+}
+
+@media (max-height: 620px) {
+    .nameGame {
+        max-height: 31vh;
+    }
+    
+    .start {
+        top: 38vh;
+        height: 58px;
+    }
+    
+    .dificult {
+        top: 52vh;
+        height: 66px;
+    }
+    
+    .buttonCredits {
+        top: 69vh;
+        height: 54px;
+    }
+    
+    .effect {
+        width: calc(32px*3);
+        height: calc(32px*3);
+    }
+    
+}
+
+/* ==========================================================
+   AJUSTE FINAL RESPONSIVO - FEIRA DE CIÊNCIAS
+   Mantém a identidade gráfica e remove dependência de coordenadas fixas.
+   ========================================================== */
+
+body.game-active {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #C2C8D9;
+}
+
+.battleStage {
+    position: relative;
+    width: 100%;
+    height: clamp(260px, 54.55vw, 620px);
+    max-height: 58vh;
+    min-height: 260px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.battleStage .background2 {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    image-rendering: pixelated;
+    filter: grayscale(70%);
+    z-index: 0;
+}
+
+/* Personagens ancorados na faixa da calçada/rua do cenário. */
+.battleStage .player,
+.battleStage .inimigo {
+    position: absolute;
+    top: auto;
+    z-index: 3;
+}
+
+.battleStage .player {
+    left: clamp(4%, 8vw, 11%);
+    bottom: 11.5%;
+    width: clamp(82px, 13vw, 188px);
+    height: auto;
+    aspect-ratio: 188 / 298;
+}
+
+.battleStage .inimigo {
+    left: auto;
+    right: clamp(5%, 12vw, 16%);
+    bottom: 12.5%;
+    width: clamp(82px, 10vw, 150px);
+    height: auto;
+    aspect-ratio: 130 / 128;
+}
+
+.battleStage .imgPlayer,
+.battleStage .imgEnemy {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.battleStage .imgPlayer {
+    transform: none;
+}
+
+.battleStage .imgEnemy {
+    transform: scaleX(-1);
+}
+
+/* Barra-base fica 10px acima da imagem do respectivo personagem. */
+.battleStage .lifePlayerRed,
+.battleStage .lifeEnemyRed {
+    position: absolute;
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: calc(100% + 10px);
+    transform: translateX(-50%);
+    width: clamp(92px, 13vw, 200px);
+    height: 14px;
+    background: #C45C5C;
+    border: 2px solid #0E1536;
+    overflow: hidden;
+    z-index: 6;
+}
+
+.battleStage .lifePlayer,
+.battleStage .lifeEnemy {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: auto;
+    width: 100%;
+    height: 100%;
+    background: #68AB5C;
+    border: 0;
+    transition: width .35s ease;
+}
+
+.gameUI {
+    position: relative;
+    width: min(1180px, 100%);
+    margin: 0 auto;
+    padding: clamp(12px, 2vw, 24px);
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(12px, 2vw, 24px);
+    align-items: start;
+}
+
+.actionBar {
+    position: sticky;
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 30;
+}
+
+.actionBar .buttonAtk,
+.actionBar .buttonDef,
+.actionBar .buttonStar {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: clamp(64px, 8vw, 92px);
+    height: clamp(64px, 8vw, 92px);
+}
+
+.actionBar .imgAtk,
+.actionBar .imgDef,
+.actionBar .imgStar {
+    position: relative;
+    width: 58%;
+    height: 58%;
+    object-fit: contain;
+}
+
+.questionArea {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.questionArea .legend {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    max-width: none;
+    max-height: none;
+    min-height: 110px;
+    padding: clamp(12px, 2vw, 22px);
+    font-size: clamp(20px, 2.8vw, 38px);
+    line-height: 1.25;
+    text-align: center;
+}
+
+.answersGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+.answersGrid .opcao {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    width: 100%;
+    min-width: 0;
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.answersGrid .spawnMsg {
+    width: 100%;
+    max-width: none;
+    max-height: none;
+    padding: 10px;
+    font-size: clamp(16px, 2vw, 24px);
+    line-height: 1.25;
+    text-align: center;
+    overflow-wrap: anywhere;
+    justify-content: center;
+}
+
+.questionArea .correcaoBox {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    margin: 0;
+    font-size: clamp(15px, 1.8vw, 22px) !important;
+}
+
+@media (max-width: 720px) {
+    .battleStage {
+        height: clamp(250px, 64vw, 360px);
+        min-height: 250px;
+        max-height: none;
+    }
+
+    .battleStage .background2 {
+        object-position: center bottom;
+    }
+
+    .battleStage .player {
+        left: 5%;
+        bottom: 12%;
+        width: clamp(72px, 22vw, 118px);
+    }
+
+    .battleStage .inimigo {
+        right: 5%;
+        bottom: 13%;
+        width: clamp(70px, 20vw, 108px);
+    }
+
+    .battleStage .lifePlayerRed,
+    .battleStage .lifeEnemyRed {
+        width: clamp(82px, 24vw, 126px);
+        height: 12px;
+    }
+
+    .gameUI {
+        grid-template-columns: 1fr;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .actionBar {
+        position: relative;
+        top: auto;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+        order: 2;
+    }
+
+    .questionArea {
+        order: 1;
+    }
+
+    .actionBar .buttonAtk,
+    .actionBar .buttonDef,
+    .actionBar .buttonStar {
+        width: 66px;
+        height: 66px;
+    }
+
+    .questionArea .legend {
+        min-height: 90px;
+        border-width: 6px;
+        font-size: clamp(18px, 5vw, 26px);
+    }
+
+    .answersGrid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .answersGrid .opcao {
+        min-height: 58px;
+        border-width: 5px;
+    }
+
+    .answersGrid .spawnMsg {
+        font-size: clamp(15px, 4vw, 20px);
+        padding: 8px;
+    }
+}
+
+@media (max-width: 420px) {
+    .battleStage {
+        height: 250px;
+    }
+
+    .battleStage .player {
+        width: 76px;
+    }
+
+    .battleStage .inimigo {
+        width: 72px;
+    }
+
+    .battleStage .lifePlayerRed,
+    .battleStage .lifeEnemyRed {
+        width: 86px;
+    }
+}
+
+
+/* ==========================================================
+   AJUSTE V2 - ENUNCIADO E ALTERNATIVAS SEM SOBREPOSIÇÃO
+   Os dois blocos permanecem no fluxo normal do documento.
+   ========================================================== */
+.gameUI,
+.gameUI * {
+    box-sizing: border-box;
+}
+
+.questionArea {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(12px, 1.8vw, 20px);
+}
+
+.questionArea > .legend {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: clamp(96px, 12vw, 150px);
+    max-width: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: clamp(14px, 2.2vw, 24px) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    white-space: normal;
+    line-height: 1.22;
+    font-size: clamp(20px, 2.5vw, 36px);
+}
+
+.questionArea > .answersGrid {
+    position: relative !important;
+    inset: auto !important;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(76px, auto);
+    gap: clamp(10px, 1.5vw, 16px);
+}
+
+.questionArea > .answersGrid > .opcao {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0;
+    min-height: 76px;
+    margin: 0 !important;
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    overflow: hidden;
+}
+
+.questionArea > .answersGrid > .opcao > .spawnMsg {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0;
+    min-height: 100%;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0;
+    padding: clamp(10px, 1.5vw, 16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    line-height: 1.25;
+    font-size: clamp(16px, 1.8vw, 24px);
+}
+
+@media (max-width: 760px) {
+    .questionArea {
+        gap: 10px;
+    }
+
+    .questionArea > .legend {
+        min-height: 88px;
+        padding: 12px !important;
+        font-size: clamp(18px, 5vw, 25px);
+        border-width: 5px;
+    }
+
+    .questionArea > .answersGrid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: minmax(56px, auto);
+        gap: 8px;
+    }
+
+    .questionArea > .answersGrid > .opcao {
+        min-height: 56px;
+        border-width: 4px;
+    }
+
+    .questionArea > .answersGrid > .opcao > .spawnMsg {
+        padding: 9px 10px;
+        font-size: clamp(15px, 4vw, 20px);
+    }
+}
+
+@media (max-width: 380px) {
+    .gameUI {
+        padding-inline: 8px;
+    }
+
+    .questionArea > .legend {
+        font-size: 17px;
+        min-height: 82px;
+        padding: 10px !important;
+    }
+
+    .questionArea > .answersGrid > .opcao > .spawnMsg {
+        font-size: 15px;
+        padding: 8px;
+    }
+}
+
+
+/* ===== EFEITO ATK / DEF RESPONSIVO ===== */
+.actionBar .buttonAtk,
+.actionBar .buttonDef {
+    overflow: visible;
+    isolation: isolate;
+}
+
+.actionBar .buttonEffect,
+.buttonAtk .buttonEffect,
+.buttonDef .buttonEffect {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 115%;
+    height: 115%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    image-rendering: pixelated;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.buttonEffect.effectAtk {
+    filter: invert(72%) sepia(60%) saturate(416%) hue-rotate(342deg) brightness(102%) contrast(103%);
+}
+
+.buttonEffect.effectDef {
+    filter: invert(54%) sepia(85%) saturate(2067%) hue-rotate(81deg) brightness(119%) contrast(129%);
+}
+
+/* ==========================================================
+   VERSÃO APRIMORADA - MECÂNICA E INTERFACE
+   ========================================================== */
+
+/* Modais de instruções e créditos */
+.gameModalOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(12px, 3vw, 28px);
+    background: rgba(8, 15, 36, 0.88);
+    overflow-y: auto;
+}
+
+.gameModalCard {
+    width: min(760px, 100%);
+    max-height: calc(100vh - 24px);
+    overflow-y: auto;
+    padding: clamp(18px, 4vw, 34px);
+    background: #C2C8D9;
+    border: clamp(5px, 1vw, 9px) solid #0E1536;
+    box-shadow: 0 0 0 4px #4F516A inset;
+    font-family: font1;
+    color: #0E1536;
+    text-align: center;
+}
+
+.gameModalCard h2 {
+    margin: 0 0 14px;
+    font-size: clamp(26px, 5vw, 46px);
+}
+
+.gameModalCard p {
+    font-size: clamp(15px, 2.2vw, 21px);
+    line-height: 1.4;
+}
+
+.modalLevel {
+    display: inline-block;
+    padding: 8px 12px;
+    border: 3px solid #0E1536;
+    background: #fff;
+}
+
+.instructionList {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0;
+    text-align: left;
+}
+
+.instructionItem {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+    background: rgba(255,255,255,.72);
+    border: 3px solid #4F516A;
+}
+
+.instructionItem img {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.instructionItem strong,
+.instructionItem span {
+    display: block;
+}
+
+.instructionItem strong {
+    margin-bottom: 5px;
+    font-size: clamp(17px, 2.4vw, 24px);
+}
+
+.instructionItem span {
+    font-size: clamp(14px, 1.8vw, 19px);
+    line-height: 1.35;
+}
+
+.modalTip {
+    padding: 12px;
+    background: #fff;
+    border-left: 6px solid #D8B75E;
+}
+
+.modalPrimaryButton,
+.proximaPerguntaButton {
+    appearance: none;
+    border: 4px solid #0E1536;
+    background: #83CB81;
+    color: #0E1536;
+    font-family: font1;
+    font-size: clamp(17px, 2.2vw, 24px);
+    min-height: 50px;
+    padding: 10px 22px;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.creditsProduct {
+    font-size: clamp(18px, 3vw, 27px) !important;
+}
+
+.creditsAuthors {
+    margin: 18px 0 24px;
+    padding: 18px;
+    background: rgba(255,255,255,.75);
+    border: 3px solid #4F516A;
+}
+
+.creditsAuthors p { margin: 7px 0; }
+.creditsInstitution { margin-top: 16px !important; }
+
+/* Alternativas: o conteúdo determina a altura; nada deve sair da caixa */
+.questionArea > .answersGrid {
+    grid-auto-rows: auto !important;
+    align-items: stretch;
+}
+
+.questionArea > .answersGrid > .opcao {
+    height: auto !important;
+    min-height: clamp(72px, 8vw, 104px) !important;
+    overflow: visible !important;
+}
+
+.questionArea > .answersGrid > .opcao > .spawnMsg {
+    height: auto !important;
+    min-height: clamp(72px, 8vw, 104px) !important;
+    overflow: visible !important;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+/* Feedback permanece até decisão do jogador/professor */
+.questionArea .correcaoBox {
+    position: relative !important;
+    width: 100% !important;
+    padding: clamp(14px, 2vw, 22px) !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    background: #fff;
+    border: 5px solid #4F516A !important;
+    color: #0E1536;
+    border-radius: 8px;
+    font-family: font1;
+}
+
+.correcaoBox.feedbackCorrect { border-color: #4D9B55 !important; }
+.correcaoBox.feedbackWrong { border-color: #C94B4B !important; }
+
+.feedbackStatus {
+    font-size: clamp(18px, 2.4vw, 28px);
+    text-align: center;
+}
+
+.feedbackCerto { color: #317A38; }
+.feedbackErrado { color: #A92F2F; }
+
+.feedbackTexto {
+    font-size: clamp(15px, 1.8vw, 21px);
+    line-height: 1.45;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+.proximaPerguntaButton {
+    align-self: center;
+    margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+    .gameModalOverlay { align-items: flex-start; }
+    .gameModalCard { max-height: none; }
+    .instructionItem {
+        grid-template-columns: 50px minmax(0, 1fr);
+        gap: 10px;
+    }
+    .instructionItem img { width: 46px; height: 46px; }
+    .questionArea > .answersGrid > .opcao,
+    .questionArea > .answersGrid > .opcao > .spawnMsg {
+        min-height: 64px !important;
+    }
+}
+
+
+/* ==========================================================
+   V5 - ANIMAÇÕES DE ATAQUE, DEFESA E RECEBIMENTO DE DANO
+   Aplicadas aos contêineres dos personagens para preservar
+   o posicionamento responsivo e as barras de vida.
+   ========================================================== */
+
+@keyframes arboPlayerAttack {
+    0%   { transform: translateX(0) scale(1); }
+    32%  { transform: translateX(clamp(18px, 4vw, 54px)) scale(1.03); }
+    48%  { transform: translateX(clamp(22px, 5vw, 68px)) scale(1.05); }
+    100% { transform: translateX(0) scale(1); }
+}
+
+@keyframes arboEnemyAttack {
+    0%   { transform: translateX(0) scale(1); }
+    32%  { transform: translateX(clamp(-54px, -4vw, -18px)) scale(1.03); }
+    48%  { transform: translateX(clamp(-68px, -5vw, -22px)) scale(1.05); }
+    100% { transform: translateX(0) scale(1); }
+}
+
+@keyframes arboCharacterHit {
+    0%   { transform: translateX(0); filter: none; }
+    18%  { transform: translateX(-7px); filter: brightness(1.55) saturate(1.7); }
+    36%  { transform: translateX(7px); filter: brightness(.72) saturate(1.5); }
+    54%  { transform: translateX(-5px); filter: brightness(1.45) saturate(1.7); }
+    72%  { transform: translateX(5px); filter: brightness(.82) saturate(1.3); }
+    100% { transform: translateX(0); filter: none; }
+}
+
+@keyframes arboPlayerDefense {
+    0%   { transform: scale(1); filter: none; }
+    35%  { transform: scale(.96); filter: brightness(1.25); }
+    58%  { transform: scale(1.04); filter: brightness(1.45); }
+    100% { transform: scale(1); filter: none; }
+}
+
+.battleStage .player.animPlayerAttack {
+    animation: arboPlayerAttack 560ms ease-in-out;
+}
+
+.battleStage .inimigo.animEnemyAttack {
+    animation: arboEnemyAttack 560ms ease-in-out;
+}
+
+.battleStage .player.animCharacterHit,
+.battleStage .inimigo.animCharacterHit {
+    animation: arboCharacterHit 520ms ease-in-out;
+}
+
+.battleStage .player.animPlayerDefense {
+    animation: arboPlayerDefense 520ms ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .battleStage .player.animPlayerAttack,
+    .battleStage .inimigo.animEnemyAttack,
+    .battleStage .player.animCharacterHit,
+    .battleStage .inimigo.animCharacterHit,
+    .battleStage .player.animPlayerDefense {
+        animation-duration: 1ms !important;
+    }
+}
+
+/* ==========================================================
+   V6 CONSOLIDADA - ESTABILIDADE, RESULTADO E INDICADORES
+   ========================================================== */
+
+.levelIndicator {
+    align-self: flex-start;
+    width: fit-content;
+    max-width: 100%;
+    padding: 7px 12px;
+    border: 3px solid #0E1536;
+    background: rgba(255,255,255,.9);
+    color: #0E1536;
+    font-family: font1;
+    font-size: clamp(14px, 1.8vw, 20px);
+    line-height: 1.2;
+}
+
+.resumoFinal {
+    position: relative;
+    z-index: 2;
+    width: min(420px, calc(100vw - 32px));
+    box-sizing: border-box;
+    display: grid;
+    gap: 7px;
+    margin: 0 0 22px;
+    padding: 15px 18px;
+    background: rgba(255,255,255,.92);
+    border: 4px solid #0E1536;
+    color: #0E1536;
+    font-family: font1;
+    font-size: clamp(14px, 2vw, 19px);
+    text-align: center;
+}
+
+.resumoFinal strong,
+.resumoFinal span,
+.resumoFinal small {
+    display: block;
+}
+
+.resumoFinal small {
+    margin-top: 4px;
+    font-size: .8em;
+    line-height: 1.3;
+}
+
+/* Transição discreta entre questões, sem alterar posições. */
+.questionArea.questionTransition {
+    animation: arboQuestionIn 180ms ease-out;
+}
+
+@keyframes arboQuestionIn {
+    from { opacity: .55; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .questionArea.questionTransition { animation: none; }
+}
+
+/* ==========================================================
+   V6.1 - CORRECAO DO PAINEL DE ACOES EM TELAS PEQUENAS
+   Mantem ATK / DEF / ESPECIAL sempre acessiveis ao toque.
+   ========================================================== */
+
+/* O indicador de nivel ocupa uma linha inteira; nao desloca as colunas. */
+.gameUI > .levelIndicator {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-self: start;
+}
+
+/* Em telas largas: acoes na esquerda, pergunta na direita. */
+.gameUI > .actionBar {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+}
+
+.gameUI > .questionArea {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: 0;
+}
+
+.actionBar .buttonAtk,
+.actionBar .buttonDef,
+.actionBar .buttonStar {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    min-width: 64px;
+    min-height: 64px;
+    max-width: 96px;
+    max-height: 96px;
+    touch-action: manipulation;
+}
+
+@media (max-width: 720px) {
+    .gameUI {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        max-width: 100%;
+        padding: 10px 10px calc(14px + env(safe-area-inset-bottom));
+        gap: 10px;
+    }
+
+    .gameUI > .levelIndicator {
+        order: 0;
+        align-self: flex-start;
+    }
+
+    /* A escolha da acao vem ANTES da pergunta, como exige a mecanica. */
+    .gameUI > .actionBar {
+        order: 1;
+        position: relative;
+        inset: auto;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(8px, 3vw, 14px);
+        padding: 8px 4px;
+        margin: 0;
+        z-index: 30;
+    }
+
+    .gameUI > .questionArea {
+        order: 2;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .actionBar .buttonAtk,
+    .actionBar .buttonDef,
+    .actionBar .buttonStar {
+        position: relative !important;
+        inset: auto !important;
+        transform: none;
+        flex: 0 1 76px;
+        width: clamp(68px, 22vw, 82px);
+        height: clamp(68px, 22vw, 82px);
+        min-width: 68px;
+        min-height: 68px;
+        max-width: 82px;
+        max-height: 82px;
+        margin: 0;
+    }
+
+    .actionBar .imgAtk,
+    .actionBar .imgDef,
+    .actionBar .imgStar {
+        width: 58%;
+        height: 58%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 360px) {
+    .gameUI {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .gameUI > .actionBar {
+        gap: 7px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .actionBar .buttonAtk,
+    .actionBar .buttonDef,
+    .actionBar .buttonStar {
+        flex-basis: 68px;
+        width: 68px;
+        height: 68px;
+        min-width: 68px;
+        min-height: 68px;
+    }
+}
+
+
+/* ==========================================================
+   V7 - MULTIPLAYER COMPETITIVO
+   ========================================================== */
+.modeSelect {
+    position: absolute;
+    left: 50%;
+    top: 71vh;
+    transform: translateX(-50%);
+    width: min(390px, 78vw);
+    min-height: 66px;
+    box-sizing: border-box;
+    padding: 9px 12px;
+    background: #7A94D3;
+    border: 6px solid #384668;
+    color: #0E1536;
+    font-family: font1;
+    font-size: clamp(20px, 4vw, 32px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 20;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+.modeSelect.multiplayerSelected {
+    background: #D8B75E;
+    border-color: #6B531B;
+}
+
+/* Reorganiza os quatro controles iniciais para acomodar o modo de jogo. */
+.start { top: 42vh; }
+.dificult { top: 54vh; }
+.modeSelect { top: 68vh; }
+.buttonCredits { top: 81vh; }
+
+.turnIndicator {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: stretch;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(14, 21, 54, .92);
+    border: 3px solid #ffffff;
+    color: #ffffff;
+    font-family: font1;
+    font-size: clamp(16px, 2vw, 22px);
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Quando há indicador de turno, as ações/perguntas passam para a linha seguinte. */
+.gameUI:has(> .turnIndicator) > .actionBar {
+    grid-row: 3;
+}
+.gameUI:has(> .turnIndicator) > .questionArea {
+    grid-row: 3;
+}
+
+.rankingMultiplayer {
+    width: min(760px, calc(100vw - 28px));
+    max-height: none;
+}
+.rankingPlayers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+}
+.rankingPlayer {
+    min-width: 0;
+    padding: 12px;
+    border: 3px solid #4F516A;
+    background: rgba(255,255,255,.8);
+    text-align: left;
+}
+.rankingPlayer h3 {
+    margin: 0 0 8px;
+    text-align: center;
+    font-size: clamp(17px, 2vw, 23px);
+}
+.rankingPlayer > span {
+    margin: 4px 0;
+}
+.rankingPlayer ul {
+    display: grid;
+    gap: 5px;
+    margin: 10px 0 0;
+    padding: 10px 0 0;
+    border-top: 2px solid #9AA0B8;
+    list-style: none;
+}
+.rankingPlayer li {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: .78em;
+    line-height: 1.25;
+}
+.rankingPlayer li span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+.rankingPlayer li strong {
+    flex: 0 0 auto;
+}
+
+@media (max-width: 720px) {
+    .start { top: 35vh; }
+    .dificult { top: 46vh; }
+    .modeSelect {
+        top: 59vh;
+        width: 78vw;
+        min-height: 58px;
+        border-width: 5px;
+        font-size: clamp(18px, 5.4vw, 27px);
+    }
+    .buttonCredits { top: 70vh; }
+
+    .gameUI > .turnIndicator {
+        order: 1;
+        width: 100%;
+    }
+    .gameUI:has(> .turnIndicator) > .actionBar { order: 2; }
+    .gameUI:has(> .turnIndicator) > .questionArea { order: 3; }
+
+    .rankingPlayers {
+        grid-template-columns: 1fr;
+    }
+    .rankingMultiplayer {
+        width: min(94vw, 560px);
+        font-size: clamp(13px, 3.8vw, 17px);
+    }
+}
+
+@media (max-height: 650px) and (min-width: 721px) {
+    .start { top: 32vh; }
+    .dificult { top: 45vh; }
+    .modeSelect { top: 59vh; }
+    .buttonCredits { top: 73vh; }
+}

@@ -1,0 +1,8 @@
+ARBOQUEST V6.2 – BANCO DE QUESTÕES REVISADO
+
+1. Banco substituído pelas 30 questões revisadas e aprovadas: 10 fáceis, 10 médias e 10 difíceis.
+2. Cada partida utiliza as 10 questões do nível escolhido, sem repetição.
+3. A ordem das 10 questões é embaralhada a cada nova partida.
+4. As quatro alternativas de cada questão também são embaralhadas a cada nova partida.
+5. A alternativa correta continua vinculada ao valor booleano true; portanto, não depende de uma letra ou posição fixa.
+6. Mantidas as correções da V6.1: responsividade mobile, botões ATK/DEF/estrela acessíveis, final por vida restante, contagem real de acertos/erros, feedback controlado e demais melhorias consolidadas.
