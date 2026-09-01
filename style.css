@@ -1659,3 +1659,166 @@ body.game-active {
     .modeSelect { top: 59vh; }
     .buttonCredits { top: 73vh; }
 }
+
+/* ==========================================================
+   V8.1 - MULTIPLAYER: VIDAS SEPARADAS E TURNO VISÍVEL
+   ========================================================== */
+
+/* No multiplayer, as duas vidas ficam separadas acima do mesmo avatar.
+   A barra mais próxima da imagem começa a 10px do personagem. */
+.battleStage .lifePlayerRed.multiplayerLife,
+.battleStage .lifePlayer2Red.multiplayerLife {
+    position: absolute;
+    left: 50%;
+    right: auto;
+    width: clamp(110px, 14vw, 210px);
+    height: 16px;
+    transform: translateX(-50%);
+    border: 2px solid #0E1536;
+    overflow: visible;
+    z-index: 8;
+    box-sizing: border-box;
+    transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+}
+
+.battleStage .lifePlayerRed.multiplayerLife.j1Life {
+    bottom: calc(100% + 32px);
+    background: #172B4D;
+}
+
+.battleStage .lifePlayer2Red.multiplayerLife.j2Life {
+    bottom: calc(100% + 10px);
+    background: #5A1E1E;
+}
+
+.battleStage .lifePlayerRed.multiplayerLife::before,
+.battleStage .lifePlayer2Red.multiplayerLife::before {
+    content: attr(data-player);
+    position: absolute;
+    right: calc(100% + 6px);
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: font1;
+    font-size: clamp(11px, 1.4vw, 15px);
+    line-height: 1;
+    color: #fff;
+    text-shadow: 1px 1px 0 #0E1536;
+    white-space: nowrap;
+}
+
+.battleStage .lifePlayerRed.multiplayerLife .lifePlayer,
+.battleStage .lifePlayer2Red.multiplayerLife .lifePlayer2 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border: 0;
+    transition: width .35s ease;
+}
+
+.battleStage .lifePlayerRed.multiplayerLife .lifePlayer {
+    background: #2F80ED;
+}
+
+.battleStage .lifePlayer2Red.multiplayerLife .lifePlayer2 {
+    background: #E5484D;
+}
+
+.battleStage .multiplayerLife.activeLife {
+    box-shadow: 0 0 0 3px rgba(255,255,255,.92), 0 0 12px rgba(255,255,255,.8);
+    transform: translateX(-50%) scale(1.04);
+    opacity: 1;
+}
+
+.battleStage .multiplayerLife:not(.activeLife) {
+    opacity: .72;
+}
+
+/* O avatar único representa o jogador cujo turno está ativo. */
+.battleStage .player.playerJ1 .imgPlayer {
+    filter: saturate(1.35) hue-rotate(175deg) drop-shadow(0 0 8px rgba(47,128,237,.9));
+}
+
+.battleStage .player.playerJ2 .imgPlayer {
+    filter: saturate(1.45) hue-rotate(330deg) drop-shadow(0 0 8px rgba(229,72,77,.9));
+}
+
+/* Aviso de turno muito mais evidente. */
+.turnIndicator {
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 4px;
+    font-size: clamp(20px, 3vw, 32px);
+    letter-spacing: .04em;
+    box-shadow: 0 4px 0 rgba(14,21,54,.35);
+}
+
+.turnIndicator.turnJ1 {
+    background: #1F5FAF;
+    border-color: #8CC4FF;
+    color: #fff;
+}
+
+.turnIndicator.turnJ2 {
+    background: #A92E36;
+    border-color: #FFB0B5;
+    color: #fff;
+}
+
+.rankingPlayer.rankingJ1 {
+    border-color: #2F80ED;
+}
+.rankingPlayer.rankingJ2 {
+    border-color: #E5484D;
+}
+
+@media (max-width: 600px) {
+    .battleStage .lifePlayerRed.multiplayerLife,
+    .battleStage .lifePlayer2Red.multiplayerLife {
+        width: clamp(96px, 31vw, 150px);
+        height: 14px;
+    }
+    .battleStage .lifePlayerRed.multiplayerLife.j1Life {
+        bottom: calc(100% + 29px);
+    }
+    .battleStage .lifePlayer2Red.multiplayerLife.j2Life {
+        bottom: calc(100% + 10px);
+    }
+    .turnIndicator {
+        min-height: 48px;
+        padding: 8px 10px;
+        font-size: clamp(18px, 5.5vw, 25px);
+    }
+}
+
+.turnFlash {
+    position: fixed;
+    left: 50%;
+    top: 18%;
+    transform: translate(-50%, -50%);
+    width: min(520px, calc(100vw - 28px));
+    box-sizing: border-box;
+    padding: 18px 20px;
+    border: 5px solid #fff;
+    font-family: font1;
+    font-size: clamp(25px, 5vw, 46px);
+    line-height: 1.1;
+    text-align: center;
+    color: #fff;
+    z-index: 9999;
+    pointer-events: none;
+    box-shadow: 0 7px 0 rgba(14,21,54,.45);
+    animation: turnFlashIn .95s ease both;
+}
+.turnFlashJ1 { background: #1F5FAF; }
+.turnFlashJ2 { background: #A92E36; }
+@keyframes turnFlashIn {
+    0% { opacity: 0; transform: translate(-50%, -65%) scale(.92); }
+    18%, 74% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -40%) scale(.98); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .turnFlash { animation: none; opacity: 1; }
+}

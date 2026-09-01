@@ -31,6 +31,15 @@ function iniciarBatalha() {
 
   player.appendChild(lifePlayerRed);
   lifePlayerRed.appendChild(lifePlayer);
+  if (window.gameMode === 'multiplayer') {
+    player.appendChild(lifePlayer2Red);
+    lifePlayer2Red.appendChild(lifePlayer2);
+    lifePlayerRed.classList.add('multiplayerLife', 'j1Life', 'activeLife');
+    lifePlayer2Red.classList.add('multiplayerLife', 'j2Life');
+    player.classList.add('playerJ1');
+  } else {
+    lifePlayerRed.classList.remove('multiplayerLife', 'j1Life', 'activeLife');
+  }
   inimigo.appendChild(lifeEnemyRed);
   lifeEnemyRed.appendChild(lifeEnemy);
 
@@ -45,7 +54,8 @@ function iniciarBatalha() {
   if (window.gameMode === 'multiplayer') {
     window.turnIndicator = document.createElement('div');
     turnIndicator.className = 'turnIndicator';
-    turnIndicator.textContent = 'VEZ DO JOGADOR 1';
+    turnIndicator.textContent = 'JOGADOR 1 • SUA VEZ';
+    turnIndicator.classList.add('turnJ1');
     gameUI.appendChild(turnIndicator);
   }
 
@@ -107,7 +117,7 @@ function mostrarComoJogar() {
   var dica = document.createElement('p');
   dica.className = 'modalTip';
   dica.textContent = window.gameMode === 'multiplayer'
-    ? 'Após cada resposta, leiam e discutam o feedback. O turno só muda quando alguém clicar em “PRÓXIMA PERGUNTA”. A vida participa da batalha visual, mas o ranking final é definido pelos acertos de cada jogador.'
+    ? 'Após cada resposta, leiam e discutam o feedback. O turno só muda quando alguém clicar em “PRÓXIMA PERGUNTA”. Cada jogador possui sua própria barra de vida. O mosquito possui resistência equivalente às 20 jogadas da partida. O ranking final continua sendo definido pelos acertos de cada jogador.'
     : 'Após cada resposta, leia o feedback. O jogo só avança quando você clicar em “PRÓXIMA PERGUNTA”.';
 
   var botao = document.createElement('button');

@@ -1,0 +1,23 @@
+ARBOQUEST V8.1 — AJUSTES DO MULTIPLAYER
+
+Base: V8 com 20 questões por nível, pares equivalentes e desempate.
+
+Correções e melhorias:
+1. J1 e J2 agora possuem vidas independentes de 200 pontos cada.
+2. As barras dos dois jogadores ficam separadas acima do avatar:
+   - J1: azul
+   - J2: vermelho
+3. A barra do jogador ativo recebe destaque visual.
+4. O avatar muda de filtro visual conforme o turno:
+   - J1: identificação azul
+   - J2: identificação vermelha
+5. O aviso de turno foi ampliado e ganhou cor correspondente ao jogador.
+6. A cada mudança de turno surge um aviso temporário grande:
+   JOGADOR 1 • SUA VEZ / JOGADOR 2 • SUA VEZ.
+7. A vida do mosquito no multiplayer passou para 400 pontos,
+   equivalente a 20 ataques normais de 20 pontos.
+8. No modo individual, a vida continua 200/200 como antes.
+9. O vencedor do multiplayer continua sendo definido pela quantidade
+   de acertos, com o sistema de desempate da V8 preservado.
+10. Ranking final passa a exibir também a vida restante de J1 e J2,
+    sem usar essa vida como critério de vitória.

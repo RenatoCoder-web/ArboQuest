@@ -1831,13 +1831,19 @@ window.resultSequenAlter = [];
 
 window.lifePlayer = document.createElement('div');
 window.lifeEnemy = document.createElement('div');
+window.lifePlayer2 = document.createElement('div');
 window.lifePlayerRed = document.createElement('div');
 window.lifeEnemyRed = document.createElement('div');
+window.lifePlayer2Red = document.createElement('div');
 
 lifePlayer.className = 'lifePlayer';
 lifeEnemy.className = 'lifeEnemy';
+lifePlayer2.className = 'lifePlayer2';
 lifePlayerRed.className = 'lifePlayerRed';
 lifeEnemyRed.className = 'lifeEnemyRed';
+lifePlayer2Red.className = 'lifePlayer2Red';
+lifePlayerRed.setAttribute('data-player', 'J1');
+lifePlayer2Red.setAttribute('data-player', 'J2');
 
 
 // ============================================================
@@ -1928,8 +1934,8 @@ var defesaAtiva = false;
 
 // ==================== MULTIPLAYER COMPETITIVO (V7) ====================
 var multiplayerStats = {
-    1: { respostas: 0, acertos: 0, erros: 0, categorias: {}, streak: 0, estrela: false, defesa: false, desempateRespostas: 0, desempateAcertos: 0, desempateErros: 0 },
-    2: { respostas: 0, acertos: 0, erros: 0, categorias: {}, streak: 0, estrela: false, defesa: false, desempateRespostas: 0, desempateAcertos: 0, desempateErros: 0 }
+    1: { respostas: 0, acertos: 0, erros: 0, categorias: {}, streak: 0, estrela: false, defesa: false, vida: 200, desempateRespostas: 0, desempateAcertos: 0, desempateErros: 0 },
+    2: { respostas: 0, acertos: 0, erros: 0, categorias: {}, streak: 0, estrela: false, defesa: false, vida: 200, desempateRespostas: 0, desempateAcertos: 0, desempateErros: 0 }
 };
 
 var desempateParesDisponiveis = [];
@@ -1948,9 +1954,25 @@ function jogadorAtual() {
 
 function resetMultiplayerStats() {
     multiplayerStats = {
-        1: { respostas: 0, acertos: 0, erros: 0, categorias: {}, streak: 0, estrela: false, defesa: false, desempateRespostas: 0, desempateAcertos: 0, desempateErros: 0 },
-        2: { respostas: 0, acertos: 0, erros: 0, categorias: {}, streak: 0, estrela: false, defesa: false, desempateRespostas: 0, desempateAcertos: 0, desempateErros: 0 }
+        1: { respostas: 0, acertos: 0, erros: 0, categorias: {}, streak: 0, estrela: false, defesa: false, vida: VIDA_MAXIMA, desempateRespostas: 0, desempateAcertos: 0, desempateErros: 0 },
+        2: { respostas: 0, acertos: 0, erros: 0, categorias: {}, streak: 0, estrela: false, defesa: false, vida: VIDA_MAXIMA, desempateRespostas: 0, desempateAcertos: 0, desempateErros: 0 }
     };
+}
+
+
+function mostrarAvisoTurnoMultiplayer(jogador) {
+    if (window.gameMode !== 'multiplayer') return;
+    var antigo = document.querySelector('.turnFlash');
+    if (antigo) antigo.remove();
+    var aviso = document.createElement('div');
+    aviso.className = 'turnFlash ' + (jogador === 1 ? 'turnFlashJ1' : 'turnFlashJ2');
+    aviso.textContent = 'JOGADOR ' + jogador + ' • SUA VEZ';
+    aviso.setAttribute('role', 'status');
+    aviso.setAttribute('aria-live', 'polite');
+    document.body.appendChild(aviso);
+    setTimeout(function() {
+        if (aviso && aviso.parentNode) aviso.remove();
+    }, 950);
 }
 
 function atualizarTurnoMultiplayer() {
@@ -1960,16 +1982,31 @@ function atualizarTurnoMultiplayer() {
     var ehDesempate = perguntaAtual && perguntaAtual[9] === 'tiebreak';
     if (typeof turnIndicator !== 'undefined' && turnIndicator) {
         if (ehDesempate) {
-            turnIndicator.textContent = 'DESEMPATE • VEZ DO JOGADOR ' + atual + ' • ' + (multiplayerStats[atual].desempateRespostas + 1);
+            turnIndicator.textContent = 'DESEMPATE • JOGADOR ' + atual + ' • SUA VEZ • ' + (multiplayerStats[atual].desempateRespostas + 1);
         } else {
-            turnIndicator.textContent = 'VEZ DO JOGADOR ' + atual + ' • ' + (multiplayerStats[atual].respostas + 1) + '/10';
+            turnIndicator.textContent = 'JOGADOR ' + atual + ' • SUA VEZ • ' + (multiplayerStats[atual].respostas + 1) + '/10';
         }
     }
     sequenciaAcertos = multiplayerStats[atual].streak;
     estrelaDisponivel = multiplayerStats[atual].estrela;
     defesaAtiva = multiplayerStats[atual].defesa;
     estrelaSelecionada = false;
+    vidaPlayer = multiplayerStats[atual].vida;
+
+    if (typeof player !== 'undefined' && player) {
+        player.classList.remove('playerJ1', 'playerJ2');
+        player.classList.add(atual === 1 ? 'playerJ1' : 'playerJ2');
+    }
+    if (typeof turnIndicator !== 'undefined' && turnIndicator) {
+        turnIndicator.classList.remove('turnJ1', 'turnJ2');
+        turnIndicator.classList.add(atual === 1 ? 'turnJ1' : 'turnJ2');
+    }
+    if (typeof lifePlayerRed !== 'undefined' && lifePlayerRed) lifePlayerRed.classList.toggle('activeLife', atual === 1);
+    if (typeof lifePlayer2Red !== 'undefined' && lifePlayer2Red) lifePlayer2Red.classList.toggle('activeLife', atual === 2);
+
     atualizarEstrela();
+    atualizarBarrasDeVida();
+    mostrarAvisoTurnoMultiplayer(atual);
 }
 
 function salvarEstadoJogadorMultiplayer() {
@@ -1978,6 +2015,7 @@ function salvarEstadoJogadorMultiplayer() {
     multiplayerStats[atual].streak = sequenciaAcertos;
     multiplayerStats[atual].estrela = estrelaDisponivel;
     multiplayerStats[atual].defesa = defesaAtiva;
+    multiplayerStats[atual].vida = vidaPlayer;
 }
 
 function registrarCategoriaMultiplayer(jogador, categoria, acertou) {
@@ -2051,6 +2089,7 @@ var DANO_ESPECIAL = 40;
 var CURA_ESPECIAL = 30;
 
 var VIDA_MAXIMA = 200;
+var VIDA_INIMIGO_MULTIPLAYER = 400; // 20 golpes normais de 20 pontos
 
 // A largura visual é relativa ao contêiner; a vida é convertida em percentual.
 var LARGURA_BARRA = 100;
@@ -2230,17 +2269,26 @@ proximaPerguntaButton.addEventListener('pointerup', function() {
 // ============================================================
 
 function atualizarBarrasDeVida() {
-    // A vida lógica permanece em pontos, mas a representação visual é percentual.
-    // Assim 200/200 = 100%, 180/200 = 90%, etc., em qualquer tamanho de tela.
-    var percentualPlayer = Math.max(0, Math.min(100, (vidaPlayer / VIDA_MAXIMA) * 100));
-    var percentualEnemy = Math.max(0, Math.min(100, (vidaEnemy / VIDA_MAXIMA) * 100));
+    var maxEnemy = window.gameMode === 'multiplayer' ? VIDA_INIMIGO_MULTIPLAYER : VIDA_MAXIMA;
+    var percentualEnemy = Math.max(0, Math.min(100, (vidaEnemy / maxEnemy) * 100));
 
-    lifePlayer.style.width = percentualPlayer + '%';
+    if (window.gameMode === 'multiplayer') {
+        var p1 = Math.max(0, Math.min(100, (multiplayerStats[1].vida / VIDA_MAXIMA) * 100));
+        var p2 = Math.max(0, Math.min(100, (multiplayerStats[2].vida / VIDA_MAXIMA) * 100));
+        lifePlayer.style.width = p1 + '%';
+        lifePlayer2.style.width = p2 + '%';
+        lifePlayer.setAttribute('aria-label', 'Vida do Jogador 1: ' + Math.round(p1) + '%');
+        lifePlayer2.setAttribute('aria-label', 'Vida do Jogador 2: ' + Math.round(p2) + '%');
+    } else {
+        var percentualPlayer = Math.max(0, Math.min(100, (vidaPlayer / VIDA_MAXIMA) * 100));
+        lifePlayer.style.width = percentualPlayer + '%';
+        lifePlayer.setAttribute('aria-label', 'Vida do jogador: ' + Math.round(percentualPlayer) + '%');
+    }
+
     lifeEnemy.style.width = percentualEnemy + '%';
-
-    lifePlayer.setAttribute('aria-label', 'Vida do jogador: ' + Math.round(percentualPlayer) + '%');
     lifeEnemy.setAttribute('aria-label', 'Vida do inimigo: ' + Math.round(percentualEnemy) + '%');
 }
+
 
 
 // ============================================================
@@ -2358,9 +2406,8 @@ function efeitoDanoInimigo() {
 
 function efeitoDanoPlayer() {
     tocarSomDano()
-    efeitoDano(
-        lifePlayer
-    );
+    var barraAtiva = (window.gameMode === 'multiplayer' && jogadorAtual() === 2) ? lifePlayer2 : lifePlayer;
+    efeitoDano(barraAtiva);
 }
 
 
@@ -2427,7 +2474,10 @@ function causarDanoPlayer(
             0,
             vidaPlayer - dano
         );
-    
+
+    if (window.gameMode === 'multiplayer') {
+        multiplayerStats[jogadorAtual()].vida = vidaPlayer;
+    }
     
     atualizarBarrasDeVida();
     
@@ -2465,7 +2515,10 @@ function curarPlayer(
             VIDA_MAXIMA,
             vidaPlayer + valor
         );
-    
+
+    if (window.gameMode === 'multiplayer') {
+        multiplayerStats[jogadorAtual()].vida = vidaPlayer;
+    }
     
     atualizarBarrasDeVida();
     
@@ -2832,8 +2885,8 @@ function finalizarJogo(
         resumoFinal.innerHTML =
             '<strong>RANKING DA MISSÃO</strong>' +
             '<div class="rankingPlayers">' +
-              '<section class="rankingPlayer"><h3>JOGADOR 1</h3><span>✓ ' + multiplayerStats[1].acertos + '/10 acertos</span><span>✕ ' + multiplayerStats[1].erros + ' erros</span>' + (multiplayerStats[1].desempateRespostas ? '<span>Desempate: ✓ ' + multiplayerStats[1].desempateAcertos + ' | ✕ ' + multiplayerStats[1].desempateErros + '</span>' : '') + '<ul>' + linhasCategorias(1) + '</ul></section>' +
-              '<section class="rankingPlayer"><h3>JOGADOR 2</h3><span>✓ ' + multiplayerStats[2].acertos + '/10 acertos</span><span>✕ ' + multiplayerStats[2].erros + ' erros</span>' + (multiplayerStats[2].desempateRespostas ? '<span>Desempate: ✓ ' + multiplayerStats[2].desempateAcertos + ' | ✕ ' + multiplayerStats[2].desempateErros + '</span>' : '') + '<ul>' + linhasCategorias(2) + '</ul></section>' +
+              '<section class="rankingPlayer rankingJ1"><h3>JOGADOR 1</h3><span>✓ ' + multiplayerStats[1].acertos + '/10 acertos</span><span>✕ ' + multiplayerStats[1].erros + ' erros</span><span>♥ Vida: ' + multiplayerStats[1].vida + '/' + VIDA_MAXIMA + '</span>' + (multiplayerStats[1].desempateRespostas ? '<span>Desempate: ✓ ' + multiplayerStats[1].desempateAcertos + ' | ✕ ' + multiplayerStats[1].desempateErros + '</span>' : '') + '<ul>' + linhasCategorias(1) + '</ul></section>' +
+              '<section class="rankingPlayer rankingJ2"><h3>JOGADOR 2</h3><span>✓ ' + multiplayerStats[2].acertos + '/10 acertos</span><span>✕ ' + multiplayerStats[2].erros + ' erros</span><span>♥ Vida: ' + multiplayerStats[2].vida + '/' + VIDA_MAXIMA + '</span>' + (multiplayerStats[2].desempateRespostas ? '<span>Desempate: ✓ ' + multiplayerStats[2].desempateAcertos + ' | ✕ ' + multiplayerStats[2].desempateErros + '</span>' : '') + '<ul>' + linhasCategorias(2) + '</ul></section>' +
             '</div>' +
             '<small>Cada jogador respondeu 10 questões equivalentes em conteúdo e dificuldade. Em caso de empate, foram usadas rodadas extras com pares específicos de desempate.</small>';
     } else {
@@ -3426,7 +3479,7 @@ function telaDeJogo() {
     
     
     vidaEnemy =
-        VIDA_MAXIMA;
+        (window.gameMode === 'multiplayer' ? VIDA_INIMIGO_MULTIPLAYER : VIDA_MAXIMA);
     
     
     sequenciaAcertos =
