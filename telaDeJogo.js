@@ -2001,8 +2001,14 @@ function atualizarTurnoMultiplayer() {
         turnIndicator.classList.remove('turnJ1', 'turnJ2');
         turnIndicator.classList.add(atual === 1 ? 'turnJ1' : 'turnJ2');
     }
-    if (typeof lifePlayerRed !== 'undefined' && lifePlayerRed) lifePlayerRed.classList.toggle('activeLife', atual === 1);
-    if (typeof lifePlayer2Red !== 'undefined' && lifePlayer2Red) lifePlayer2Red.classList.toggle('activeLife', atual === 2);
+    if (typeof lifePlayerRed !== 'undefined' && lifePlayerRed) {
+        lifePlayerRed.classList.toggle('activeLife', atual === 1);
+        lifePlayerRed.setAttribute('aria-hidden', atual === 1 ? 'false' : 'true');
+    }
+    if (typeof lifePlayer2Red !== 'undefined' && lifePlayer2Red) {
+        lifePlayer2Red.classList.toggle('activeLife', atual === 2);
+        lifePlayer2Red.setAttribute('aria-hidden', atual === 2 ? 'false' : 'true');
+    }
 
     atualizarEstrela();
     atualizarBarrasDeVida();
@@ -2945,6 +2951,35 @@ function finalizarJogo(
     );
     
     
+    // ========================================================
+    // PROTEÇÃO CONTRA TOQUE ACIDENTAL AO ENCERRAR A PARTIDA
+    // ========================================================
+    // O último toque usado para responder/avançar não pode acionar
+    // imediatamente o botão que acabou de surgir na tela final.
+    var atrasoLiberacaoFinal = 3000;
+    botaoNovamente.disabled = true;
+    botaoNovamente.style.pointerEvents = 'none';
+    botaoNovamente.style.opacity = '0.58';
+    botaoNovamente.style.cursor = 'default';
+    botaoNovamente.textContent = 'JOGAR NOVAMENTE • 3';
+
+    var segundosRestantes = 3;
+    var contadorLiberacao = setInterval(function() {
+        segundosRestantes--;
+        if (segundosRestantes > 0) {
+            botaoNovamente.textContent = 'JOGAR NOVAMENTE • ' + segundosRestantes;
+        }
+    }, 1000);
+
+    setTimeout(function() {
+        clearInterval(contadorLiberacao);
+        botaoNovamente.disabled = false;
+        botaoNovamente.style.pointerEvents = 'auto';
+        botaoNovamente.style.opacity = '1';
+        botaoNovamente.style.cursor = 'pointer';
+        botaoNovamente.textContent = 'JOGAR NOVAMENTE';
+    }, atrasoLiberacaoFinal);
+
     botaoNovamente.onmouseenter =
         function() {
             

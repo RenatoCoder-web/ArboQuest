@@ -1,0 +1,21 @@
+ARBOQUEST V8.2 — AJUSTES APÓS TESTE MULTIPLAYER
+
+1. BARRA DE VIDA POR TURNO
+- No multiplayer, apenas a barra de vida do jogador ativo é exibida.
+- J1 mantém identificação azul e J2, vermelha.
+- A barra ativa permanece ancorada 10 px acima do avatar.
+- Ao trocar o turno, a barra anterior some e a barra do próximo jogador aparece.
+
+2. DELAY NA TELA FINAL
+- O botão JOGAR NOVAMENTE fica bloqueado por 3 segundos após a tela de ranking surgir.
+- Durante esse período aparece uma contagem regressiva no próprio botão.
+- A medida evita que o último toque/clique da jogada acione acidentalmente o retorno à tela inicial.
+- Após os 3 segundos, o botão é liberado normalmente.
+
+3. PRESERVADO
+- Ranking por acertos/erros.
+- Desempate por pares equivalentes.
+- 10 questões por jogador no multiplayer.
+- Alternativas embaralhadas.
+- Feedback controlado pelo botão Próxima Pergunta.
+- Vida do mosquito e demais regras da V8.1.

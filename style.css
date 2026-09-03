@@ -1664,13 +1664,14 @@ body.game-active {
    V8.1 - MULTIPLAYER: VIDAS SEPARADAS E TURNO VISÍVEL
    ========================================================== */
 
-/* No multiplayer, as duas vidas ficam separadas acima do mesmo avatar.
-   A barra mais próxima da imagem começa a 10px do personagem. */
+/* V8.2: no multiplayer, somente a vida do jogador da vez fica visível.
+   As duas barras usam a mesma âncora, exatamente 10px acima do avatar. */
 .battleStage .lifePlayerRed.multiplayerLife,
 .battleStage .lifePlayer2Red.multiplayerLife {
     position: absolute;
     left: 50%;
     right: auto;
+    bottom: calc(100% + 10px);
     width: clamp(110px, 14vw, 210px);
     height: 16px;
     transform: translateX(-50%);
@@ -1682,12 +1683,10 @@ body.game-active {
 }
 
 .battleStage .lifePlayerRed.multiplayerLife.j1Life {
-    bottom: calc(100% + 32px);
     background: #172B4D;
 }
 
 .battleStage .lifePlayer2Red.multiplayerLife.j2Life {
-    bottom: calc(100% + 10px);
     background: #5A1E1E;
 }
 
@@ -1725,13 +1724,14 @@ body.game-active {
 }
 
 .battleStage .multiplayerLife.activeLife {
+    display: block;
     box-shadow: 0 0 0 3px rgba(255,255,255,.92), 0 0 12px rgba(255,255,255,.8);
     transform: translateX(-50%) scale(1.04);
     opacity: 1;
 }
 
 .battleStage .multiplayerLife:not(.activeLife) {
-    opacity: .72;
+    display: none;
 }
 
 /* O avatar único representa o jogador cujo turno está ativo. */
@@ -1780,10 +1780,8 @@ body.game-active {
         width: clamp(96px, 31vw, 150px);
         height: 14px;
     }
-    .battleStage .lifePlayerRed.multiplayerLife.j1Life {
-        bottom: calc(100% + 29px);
-    }
-    .battleStage .lifePlayer2Red.multiplayerLife.j2Life {
+    .battleStage .lifePlayerRed.multiplayerLife,
+    .battleStage .lifePlayer2Red.multiplayerLife {
         bottom: calc(100% + 10px);
     }
     .turnIndicator {

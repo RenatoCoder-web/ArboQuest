@@ -36,6 +36,8 @@ function iniciarBatalha() {
     lifePlayer2Red.appendChild(lifePlayer2);
     lifePlayerRed.classList.add('multiplayerLife', 'j1Life', 'activeLife');
     lifePlayer2Red.classList.add('multiplayerLife', 'j2Life');
+    lifePlayerRed.setAttribute('aria-hidden', 'false');
+    lifePlayer2Red.setAttribute('aria-hidden', 'true');
     player.classList.add('playerJ1');
   } else {
     lifePlayerRed.classList.remove('multiplayerLife', 'j1Life', 'activeLife');
