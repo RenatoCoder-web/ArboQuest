@@ -2094,6 +2094,9 @@ var DANO_ESPECIAL = 40;
 
 var CURA_ESPECIAL = 30;
 
+// Defesa correta recupera uma pequena quantidade de vida sem substituir o especial.
+var CURA_DEFESA = 10;
+
 var VIDA_MAXIMA = 200;
 var VIDA_INIMIGO_MULTIPLAYER = 400; // 20 golpes normais de 20 pontos
 
@@ -3348,8 +3351,11 @@ function responder(
             acao === 'defesa'
         ) {
             animarDefesaPlayer();
+            // Recuperação leve ao acertar com DEFESA: 10 pontos.
+            // O ESPECIAL continua mais valioso, pois recupera 30 pontos.
+            curarPlayer(CURA_DEFESA);
             defesaAtiva = true;
-            console.log('🛡️ DEFESA ATIVA PARA O PRÓXIMO DANO');
+            console.log('🛡️ DEFESA ATIVA + RECUPERAÇÃO DE ' + CURA_DEFESA + ' DE VIDA');
         }
     }
     

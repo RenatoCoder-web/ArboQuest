@@ -1777,8 +1777,8 @@ body.game-active {
 @media (max-width: 600px) {
     .battleStage .lifePlayerRed.multiplayerLife,
     .battleStage .lifePlayer2Red.multiplayerLife {
-        width: clamp(96px, 31vw, 150px);
-        height: 14px;
+        width: clamp(88px, 26vw, 128px);
+        height: 13px;
     }
     .battleStage .lifePlayerRed.multiplayerLife,
     .battleStage .lifePlayer2Red.multiplayerLife {

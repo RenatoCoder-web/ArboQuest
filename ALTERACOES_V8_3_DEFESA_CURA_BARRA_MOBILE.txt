@@ -1,0 +1,7 @@
+ARBOQUEST V8.3 – AJUSTES
+
+1. DEFESA correta agora recupera 10 pontos de vida.
+2. O Especial continua recuperando 30 pontos, preservando sua vantagem.
+3. A DEFESA correta continua ativando proteção para o próximo dano, como antes.
+4. A barra de vida do multiplayer foi reduzida no celular para melhor proporção visual.
+5. Nenhuma outra regra da V8.2 foi alterada.
