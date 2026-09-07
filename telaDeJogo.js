@@ -1954,8 +1954,8 @@ function jogadorAtual() {
 
 function resetMultiplayerStats() {
     multiplayerStats = {
-        1: { respostas: 0, acertos: 0, erros: 0, categorias: {}, streak: 0, estrela: false, defesa: false, vida: VIDA_MAXIMA, desempateRespostas: 0, desempateAcertos: 0, desempateErros: 0 },
-        2: { respostas: 0, acertos: 0, erros: 0, categorias: {}, streak: 0, estrela: false, defesa: false, vida: VIDA_MAXIMA, desempateRespostas: 0, desempateAcertos: 0, desempateErros: 0 }
+        1: { respostas: 0, acertos: 0, erros: 0, categorias: {}, streak: 0, estrela: false, defesa: false, vida: vidaMaximaJogador(), desempateRespostas: 0, desempateAcertos: 0, desempateErros: 0 },
+        2: { respostas: 0, acertos: 0, erros: 0, categorias: {}, streak: 0, estrela: false, defesa: false, vida: vidaMaximaJogador(), desempateRespostas: 0, desempateAcertos: 0, desempateErros: 0 }
     };
 }
 
@@ -1984,7 +1984,7 @@ function atualizarTurnoMultiplayer() {
         if (ehDesempate) {
             turnIndicator.textContent = 'DESEMPATE • JOGADOR ' + atual + ' • SUA VEZ • ' + (multiplayerStats[atual].desempateRespostas + 1);
         } else {
-            turnIndicator.textContent = 'JOGADOR ' + atual + ' • SUA VEZ • ' + (multiplayerStats[atual].respostas + 1) + '/10';
+            turnIndicator.textContent = 'JOGADOR ' + atual + ' • SUA VEZ • ' + (multiplayerStats[atual].respostas + 1) + '/' + questoesPorJogador();
         }
     }
     sequenciaAcertos = multiplayerStats[atual].streak;
@@ -2054,6 +2054,10 @@ function adicionarProximoParDesempate() {
 
 function processarFimMultiplayer() {
     var a1 = multiplayerStats[1].acertos;
+    if (window.customMode) {
+        finalizarJogo(resultadoMultiplayer());
+        return;
+    }
     var a2 = multiplayerStats[2].acertos;
     if (a1 !== a2) {
         finalizarJogo(resultadoMultiplayer());
@@ -2099,6 +2103,26 @@ var CURA_DEFESA = 10;
 
 var VIDA_MAXIMA = 200;
 var VIDA_INIMIGO_MULTIPLAYER = 400; // 20 golpes normais de 20 pontos
+
+
+function totalQuestoesPersonalizadas() {
+    return (window.customMode && Array.isArray(window.customQuestionBank)) ? window.customQuestionBank.length : 0;
+}
+
+function questoesPorJogador() {
+    if (window.customMode) return Math.max(1, Math.floor(totalQuestoesPersonalizadas() / 2));
+    return 10;
+}
+
+function vidaMaximaJogador() {
+    if (window.customMode) return Math.max(VIDA_MAXIMA, questoesPorJogador() * DANO_NORMAL);
+    return VIDA_MAXIMA;
+}
+
+function vidaMaximaInimigo() {
+    if (window.customMode) return Math.max(VIDA_INIMIGO_MULTIPLAYER, totalQuestoesPersonalizadas() * DANO_NORMAL);
+    return VIDA_INIMIGO_MULTIPLAYER;
+}
 
 // A largura visual é relativa ao contêiner; a vida é convertida em percentual.
 var LARGURA_BARRA = 100;
@@ -2245,10 +2269,33 @@ function esconderCorrecao() {
 }
 
 function mostrarCorrecao(perguntaAtual, estaCerta) {
-    var explicacao = perguntaAtual[6] || 'Consulte a explicação da questão.';
     feedbackStatus.textContent = estaCerta ? '✓ RESPOSTA CORRETA' : '✕ RESPOSTA INCORRETA';
     feedbackStatus.className = 'feedbackStatus ' + (estaCerta ? 'feedbackCerto' : 'feedbackErrado');
-    feedbackTexto.textContent = explicacao;
+    feedbackTexto.innerHTML = '';
+
+    if (window.customMode) {
+        var alternativaCorreta = '';
+        for (var k = 1; k <= 4; k++) {
+            if (perguntaAtual[k] && perguntaAtual[k][1] === true) {
+                alternativaCorreta = perguntaAtual[k][0];
+                break;
+            }
+        }
+        var momento = document.createElement('strong');
+        momento.className = 'discussionTitle';
+        momento.textContent = 'MOMENTO DE DISCUSSÃO';
+        var resposta = document.createElement('p');
+        resposta.textContent = 'Resposta correta: ' + alternativaCorreta;
+        var orientacao = document.createElement('p');
+        orientacao.textContent = 'Professor(a), converse com a turma sobre esta questão antes de continuar.';
+        feedbackTexto.append(momento, resposta, orientacao);
+        proximaPerguntaButton.textContent = 'PRÓXIMA QUESTÃO';
+    } else {
+        var explicacao = perguntaAtual[6] || 'Consulte a explicação da questão.';
+        feedbackTexto.textContent = explicacao;
+        proximaPerguntaButton.textContent = 'PRÓXIMA PERGUNTA';
+    }
+
     correcaoBox.classList.toggle('feedbackCorrect', !!estaCerta);
     correcaoBox.classList.toggle('feedbackWrong', !estaCerta);
     correcaoBox.style.display = 'flex';
@@ -2278,12 +2325,12 @@ proximaPerguntaButton.addEventListener('pointerup', function() {
 // ============================================================
 
 function atualizarBarrasDeVida() {
-    var maxEnemy = window.gameMode === 'multiplayer' ? VIDA_INIMIGO_MULTIPLAYER : VIDA_MAXIMA;
+    var maxEnemy = window.gameMode === 'multiplayer' ? vidaMaximaInimigo() : VIDA_MAXIMA;
     var percentualEnemy = Math.max(0, Math.min(100, (vidaEnemy / maxEnemy) * 100));
 
     if (window.gameMode === 'multiplayer') {
-        var p1 = Math.max(0, Math.min(100, (multiplayerStats[1].vida / VIDA_MAXIMA) * 100));
-        var p2 = Math.max(0, Math.min(100, (multiplayerStats[2].vida / VIDA_MAXIMA) * 100));
+        var p1 = Math.max(0, Math.min(100, (multiplayerStats[1].vida / vidaMaximaJogador()) * 100));
+        var p2 = Math.max(0, Math.min(100, (multiplayerStats[2].vida / vidaMaximaJogador()) * 100));
         lifePlayer.style.width = p1 + '%';
         lifePlayer2.style.width = p2 + '%';
         lifePlayer.setAttribute('aria-label', 'Vida do Jogador 1: ' + Math.round(p1) + '%');
@@ -2521,7 +2568,7 @@ function curarPlayer(
     
     vidaPlayer =
         Math.min(
-            VIDA_MAXIMA,
+            (window.gameMode === 'multiplayer' ? vidaMaximaJogador() : VIDA_MAXIMA),
             vidaPlayer + valor
         );
 
@@ -2894,10 +2941,10 @@ function finalizarJogo(
         resumoFinal.innerHTML =
             '<strong>RANKING DA MISSÃO</strong>' +
             '<div class="rankingPlayers">' +
-              '<section class="rankingPlayer rankingJ1"><h3>JOGADOR 1</h3><span>✓ ' + multiplayerStats[1].acertos + '/10 acertos</span><span>✕ ' + multiplayerStats[1].erros + ' erros</span><span>♥ Vida: ' + multiplayerStats[1].vida + '/' + VIDA_MAXIMA + '</span>' + (multiplayerStats[1].desempateRespostas ? '<span>Desempate: ✓ ' + multiplayerStats[1].desempateAcertos + ' | ✕ ' + multiplayerStats[1].desempateErros + '</span>' : '') + '<ul>' + linhasCategorias(1) + '</ul></section>' +
-              '<section class="rankingPlayer rankingJ2"><h3>JOGADOR 2</h3><span>✓ ' + multiplayerStats[2].acertos + '/10 acertos</span><span>✕ ' + multiplayerStats[2].erros + ' erros</span><span>♥ Vida: ' + multiplayerStats[2].vida + '/' + VIDA_MAXIMA + '</span>' + (multiplayerStats[2].desempateRespostas ? '<span>Desempate: ✓ ' + multiplayerStats[2].desempateAcertos + ' | ✕ ' + multiplayerStats[2].desempateErros + '</span>' : '') + '<ul>' + linhasCategorias(2) + '</ul></section>' +
+              '<section class="rankingPlayer rankingJ1"><h3>JOGADOR 1</h3><span>✓ ' + multiplayerStats[1].acertos + '/' + questoesPorJogador() + ' acertos</span><span>✕ ' + multiplayerStats[1].erros + ' erros</span><span>♥ Vida: ' + multiplayerStats[1].vida + '/' + vidaMaximaJogador() + '</span>' + (multiplayerStats[1].desempateRespostas ? '<span>Desempate: ✓ ' + multiplayerStats[1].desempateAcertos + ' | ✕ ' + multiplayerStats[1].desempateErros + '</span>' : '') + '<ul>' + linhasCategorias(1) + '</ul></section>' +
+              '<section class="rankingPlayer rankingJ2"><h3>JOGADOR 2</h3><span>✓ ' + multiplayerStats[2].acertos + '/' + questoesPorJogador() + ' acertos</span><span>✕ ' + multiplayerStats[2].erros + ' erros</span><span>♥ Vida: ' + multiplayerStats[2].vida + '/' + vidaMaximaJogador() + '</span>' + (multiplayerStats[2].desempateRespostas ? '<span>Desempate: ✓ ' + multiplayerStats[2].desempateAcertos + ' | ✕ ' + multiplayerStats[2].desempateErros + '</span>' : '') + '<ul>' + linhasCategorias(2) + '</ul></section>' +
             '</div>' +
-            '<small>Cada jogador respondeu 10 questões equivalentes em conteúdo e dificuldade. Em caso de empate, foram usadas rodadas extras com pares específicos de desempate.</small>';
+            '<small>' + (window.customMode ? 'Questões personalizadas organizadas em pares equivalentes. Em caso de igualdade de acertos, a partida termina empatada nesta versão.' : 'Cada jogador respondeu 10 questões equivalentes em conteúdo e dificuldade. Em caso de empate, foram usadas rodadas extras com pares específicos de desempate.') + '</small>';
     } else {
         resumoFinal.innerHTML =
             '<strong>RESUMO DA PARTIDA</strong>' +
@@ -3516,11 +3563,11 @@ function telaDeJogo() {
     
     
     vidaPlayer =
-        VIDA_MAXIMA;
+        (window.gameMode === 'multiplayer' ? vidaMaximaJogador() : VIDA_MAXIMA);
     
     
     vidaEnemy =
-        (window.gameMode === 'multiplayer' ? VIDA_INIMIGO_MULTIPLAYER : VIDA_MAXIMA);
+        (window.gameMode === 'multiplayer' ? vidaMaximaInimigo() : VIDA_MAXIMA);
     
     
     sequenciaAcertos =
@@ -3588,10 +3635,25 @@ function telaDeJogo() {
         return Object.keys(grupos).map(function(id) { return grupos[id]; });
     }
 
-    var paresRegulares = agruparPorPar(array, dificuldadeSelection);
+    var fonteQuestoes = window.customMode ? (window.customQuestionBank || []) : array;
+    var nivelFonte = window.customMode ? 'p' : dificuldadeSelection;
+    var paresRegulares = agruparPorPar(fonteQuestoes, nivelFonte);
     embaralharLista(paresRegulares);
 
-    if (window.gameMode === 'multiplayer') {
+    if (window.customMode) {
+        // Modo Personalizado: pares 1–2, 3–4... já foram formados no cadastro.
+        // A ordem dos pares é embaralhada e, dentro de cada par, sorteamos quem recebe qual questão.
+        paresRegulares.forEach(function(par) {
+            if (par.length !== 2) return;
+            var dupla = par.slice();
+            embaralharLista(dupla);
+            quest.push(copiarEEmbaralharQuestao(dupla[0])); // J1
+            quest.push(copiarEEmbaralharQuestao(dupla[1])); // J2
+        });
+        desempateParesDisponiveis = [];
+        indiceDesempate = 0;
+        emDesempate = false;
+    } else if (window.gameMode === 'multiplayer') {
         // Cada um dos 10 pares contém duas questões equivalentes.
         // Em cada rodada, uma vai para J1 e a outra para J2; a atribuição A/B é sorteada.
         paresRegulares.forEach(function(par) {

@@ -1,0 +1,30 @@
+ARBOQUEST — MODELO PARA O MODO PERSONALIZADO
+
+Use sempre um número PAR de questões.
+Organize as questões em pares equivalentes: 1–2, 3–4, 5–6...
+Cada questão precisa de quatro alternativas e da indicação da correta.
+
+QUESTÃO 1
+Pergunta: Qual é a capital de Pernambuco?
+A) Recife
+B) Petrolina
+C) Caruaru
+D) Olinda
+Correta: A
+
+QUESTÃO 2
+Pergunta: Qual destes municípios fica no Sertão de Pernambuco?
+A) Olinda
+B) Petrolina
+C) Paulista
+D) Igarassu
+Correta: B
+
+Continue o mesmo padrão para QUESTÃO 3, QUESTÃO 4 etc.
+
+IMPORTANTE
+- O jogo sorteia qual questão de cada par será destinada ao Jogador 1 e ao Jogador 2.
+- As alternativas também são embaralhadas.
+- As questões personalizadas existem apenas durante a sessão atual.
+- O banco oficial do ArboQuest não é alterado.
+- Nesta V9, em caso de igualdade de acertos no Modo Personalizado, o resultado é EMPATE.

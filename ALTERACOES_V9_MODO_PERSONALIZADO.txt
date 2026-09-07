@@ -1,0 +1,29 @@
+ARBOQUEST V9 — MODO PERSONALIZADO
+
+Base preservada: V8.3 estável.
+
+IMPLEMENTADO
+- Terceiro modo na tela inicial: MODO PERSONALIZADO.
+- Uso exclusivamente multiplayer.
+- Tutorial antes da entrada das questões.
+- Entrada de questões em texto simples, sem arrays, booleanos ou JavaScript.
+- Quatro alternativas obrigatórias e indicação da correta.
+- Validação automática do formato.
+- Validação de número par de questões.
+- Mensagens orientadoras quando houver erro.
+- Formação de pares equivalentes 1–2, 3–4, 5–6 etc.
+- Sorteio da distribuição das duas questões de cada par entre J1 e J2.
+- Embaralhamento das alternativas.
+- Quantidade igual de questões para os dois jogadores.
+- Registro de acertos e erros e ranking final.
+- Após a resposta: acerto/erro + resposta correta + MOMENTO DE DISCUSSÃO.
+- Avanço somente pelo botão PRÓXIMA QUESTÃO.
+- Sem feedback explicativo pré-programado no modo personalizado.
+- Empate declarado sem desempate automático nesta V9.
+- Questões armazenadas apenas na sessão; o banco oficial não é modificado.
+- Vida do jogador e do mosquito dimensionadas automaticamente conforme o número de questões.
+- Limite de segurança da V9: até 60 questões personalizadas por sessão.
+
+FICA PARA V9.1
+- Exportar banco de questões.
+- Importar banco salvo anteriormente.
