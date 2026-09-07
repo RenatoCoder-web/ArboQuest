@@ -1945,3 +1945,48 @@ body.game-active {
   .customQuestionsInput { min-height: 240px; }
   .customActions > button { width: 100%; min-height: 52px; }
 }
+
+/* ============================================================
+   V9.2 — CORREÇÃO MOBILE: MODO PERSONALIZADO x CRÉDITOS
+   Evita sobreposição causada pelo texto mais longo do modo.
+   ============================================================ */
+@media (max-width: 720px) {
+    .modeSelect {
+        top: 58vh;
+        width: min(88vw, 430px);
+        height: 56px;
+        min-height: 56px;
+        padding: 7px 10px;
+        border-width: 5px;
+        font-size: clamp(16px, 4.8vw, 22px);
+        line-height: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+        box-sizing: border-box;
+    }
+
+    .buttonCredits {
+        /* Mantém uma distância mínima real em relação ao botão de modo. */
+        top: calc(58vh + 72px);
+        width: min(58vw, 270px);
+        height: 60px;
+        min-height: 60px;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 360px) {
+    .modeSelect {
+        width: 92vw;
+        font-size: clamp(15px, 4.6vw, 18px);
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    .buttonCredits {
+        top: calc(58vh + 70px);
+        width: 62vw;
+        font-size: 22px;
+    }
+}
